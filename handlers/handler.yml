@@ -3,21 +3,3 @@
   service:
     name: ssh
     state: restarted
-
-- name: update_upgrade
-  become: true
-  apt:
-    update_cache: yes
-    upgrade: dist
-
-- name: restart_nginx
-  become: true
-  service:
-    name: nginx
-    state: restarted
-
-- name: restart ufw
-  become: true
-  service:
-    name: ufw
-    state: restarted

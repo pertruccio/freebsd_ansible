@@ -1,13 +1,4 @@
 - name: Install packages
-  apt: 
-    name: 
-      - 'nano'
-      - 'tmux'
-      - 'zsh'
-      - 'neofetch'
-      - 'coreutils'
-      - 'zsh-syntax-highlighting'
-      - 'htop'
-      - 'lnav'
-    update_cache: true
-    state: present
+  pkgng:
+      name: ['nano','tmux','zsh','neofetch','coreutils','sudo','rust-1.40.0','zsh-syntax-highlighting']
+      state: present # not required. choices: present;latest;absent. State of the package.,Note: "latest" added in 2.7

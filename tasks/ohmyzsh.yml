@@ -38,7 +38,7 @@
   template:
     src: "~/.dotfiles/.zshrc_deb"
     dest: "~/.zshrc"
-    backup: yes
+    backup: yes 
 
 - name: templating ~/.theme.zsh
   template:
@@ -49,4 +49,4 @@
 - name: set zsh as default shell
   user: 
     name: root
-    shell: /usr/bin/zsh
+    shell: /usr/local/bin/zsh
