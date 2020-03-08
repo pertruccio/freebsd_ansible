@@ -1,0 +1,13 @@
+- name: Install packages
+  apt: 
+    name: 
+      - 'nano'
+      - 'tmux'
+      - 'zsh'
+      - 'neofetch'
+      - 'coreutils'
+      - 'zsh-syntax-highlighting'
+      - 'htop'
+      - 'lnav'
+    update_cache: true
+    state: present

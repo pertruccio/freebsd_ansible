@@ -1,0 +1,20 @@
+- name: Install Proxmox source
+  apt_repository:
+    repo: deb http://download.proxmox.com/debian/pve buster pve-no-subscription
+    state: present
+    filename: pve-install-repo.list
+    update_cache: no
+  notify: update_upgrade
+
+- name: add GPG Key for Proxmox
+  apt_key:
+    url: http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg
+    state: present
+
+- name: Install Packages
+  apt:
+    name:
+      - 'proxmox-ve'
+      - 'postfix'
+      - 'open-iscsi'
+    state: present
