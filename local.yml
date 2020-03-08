@@ -9,7 +9,6 @@
 
   tasks:
     - include: tasks/packages.yml
-    # - include: tasks/install_extras.yml
     - include: tasks/dotfiles.yml
     - include: tasks/ohmyzsh.yml
     - include: tasks/ssh_config.yml
