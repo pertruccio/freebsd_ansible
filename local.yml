@@ -8,6 +8,7 @@
     - include: handlers/handler.yml
 
   tasks:
+    - include: tasks/system_settings.yml
     - include: tasks/packages.yml
     - include: tasks/dotfiles.yml
     - include: tasks/ohmyzsh.yml
