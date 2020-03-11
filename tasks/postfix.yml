@@ -1,0 +1,14 @@
+- name: install postfix
+  pkgng:
+    name: 'postfix-ldap-sasl'
+    state: present
+
+- name: templating postfix main config
+  template:
+    src: templates/postfix_main.j2
+    dst: /usr/local/etc/postfix/main.cf
+
+- name: templating postfix master config
+  template:
+    src: templates/postfix_master.j2
+    dst: /usr/local/etc/postfix/master.cf
