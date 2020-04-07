@@ -1,0 +1,4 @@
+- name: Install slapd
+  pkgng:
+      name: 'slapd'
+      state: present # not required. choices: present;latest;absent. State of the package.,Note: "latest" added in 2.7
