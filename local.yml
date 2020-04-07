@@ -14,6 +14,7 @@
     - include: tasks/ohmyzsh.yml
     - include: tasks/ssh_config.yml
     - include: tasks/disable_login_banner.yml
+    - include: tasks/install_iocage.yml
 
 - hosts: mail_servers
   become: true
@@ -25,14 +26,3 @@
   
   tasks:
     # - include: tasks/postfix.yml
-
-- hosts: ldap_servers
-  become: true
-  vars:
-    domain: muessig.family
-  
-  handlers:
-    - include: handlers/handler.yml
-  
-  tasks:
-    - include: tasks/install_snapd.yml
