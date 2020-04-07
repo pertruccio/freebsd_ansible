@@ -1,34 +1,55 @@
 - name: Activating ipfw in rc.conf
   lineinfile:
     path: /etc/rc.conf
-    regex: "^firewall_enable="
-    line: "firewall_enable=YES"
-  notify: restart ipfw
-
-- name: Type Config for ipfw in rc.conf
-  lineinfile:
-    path: /etc/rc.conf
-    regex: "^firewall_type="
-    line: "firewall_type=workstation"
+    regex: '^firewall_enable='
+    line: 'firewall_enable=YES'
   notify: restart ipfw
 
 - name: Silent Mode for ipfw in rc.conf
   lineinfile:
     path: /etc/rc.conf
-    regex: "^firewall_quiet="
-    line: "firewall_quit=YES"
+    regex: '^firewall_quiet='
+    line: 'firewall_quiet=YES'
   notify: restart ipfw
 
-- name: allowing all services outgoing ipfw in rc.conf
+- name: add gateway mode in rc.conf
   lineinfile:
     path: /etc/rc.conf
-    regex: "^firewall_allowservices="
-    line: 'firewall_allowservices=any'
+    regex: '^gateway_enable='
+    line: 'gateway_enable=YES'
   notify: restart ipfw
 
-- name: allowing specific incoming services ipfw in rc.conf
+- name: add nat mode in rc.conf
   lineinfile:
     path: /etc/rc.conf
-    regex: "^firewall_myservices="
-    line: 'firewall_myservices="ssh http https"'
+    regex: '^firewall_nat_enable='
+    line: 'firewall_nat_enable=YES'
   notify: restart ipfw
+
+- name: add firewall script in rc.conf
+  lineinfile:
+    path: /etc/rc.conf
+    regex: '^firewall_script='
+    line: 'firewall_script=/usr/local/etc/ipfw.rules'
+  notify: restart ipfw
+
+# - name: Type Config for ipfw in rc.conf
+#   lineinfile:
+#     path: /etc/rc.conf
+#     regex: '^firewall_type='
+#     line: 'firewall_type=workstation'
+#   notify: restart ipfw
+
+# - name: allowing all services outgoing ipfw in rc.conf
+#   lineinfile:
+#     path: /etc/rc.conf
+#     regex: '^firewall_allowservices='
+#     line: 'firewall_allowservices=any'
+#   notify: restart ipfw
+
+# - name: allowing specific incoming services ipfw in rc.conf
+#   lineinfile:
+#     path: /etc/rc.conf
+#     regex: '^firewall_myservices='
+#     line: 'firewall_myservices='ssh http https''
+#   notify: restart ipfw

@@ -1,0 +1,60 @@
+# NICs
+lan_if="em0"
+
+# NAT
+nat_if="em0"
+nat_ip=`ifconfig $nat_if | grep -v inet6 | grep inet | awk '{ print $2; }'`
+jail_lan="172.16.1.0/24"
+
+# CMD
+cmd="/sbin/ipfw -q"
+
+# -------------------------------------------------------------------- #
+
+# Alles raus
+/sbin/ipfw -q -f flush
+
+# -------------------------------------------------------------------- #
+# loopback
+$cmd add 100 pass all from any to any via lo0
+$cmd add 200 deny all from any to 127.0.0.0/8
+$cmd add 300 deny ip from 127.0.0.0/8 to any
+$cmd add 400 deny all from any to ::1
+$cmd add 500 deny all from ::1 to any
+
+# mandatory ipv6
+# DAD
+$cmd add pass ipv6-icmp from :: to ff02::/16
+# RS, RA, NS, NA, redirect...
+$cmd add pass ipv6-icmp from fe80::/10 to fe80::/10
+$cmd add pass ipv6-icmp from fe80::/10 to ff02::/16
+# Allow ICMPv6 destination unreachable
+$cmd add pass ipv6-icmp from any to any icmp6types 1
+# Allow NS/NA/toobig (don't filter it out)
+$cmd add pass ipv6-icmp from any to any icmp6types 2,135,136
+
+# allow all with a valid state
+$cmd add check-state
+$cmd add pass tcp  from me to any established
+$cmd add pass tcp  from me to any setup keep-state
+$cmd add pass udp  from me to any keep-state
+$cmd add pass icmp from me to any keep-state
+$cmd add pass ipv6-icmp from me to any keep-state
+
+# icmp
+$cmd add pass icmp from any to any icmptype 3,4,8,22
+$cmd add pass ipv6-icmp from any to any icmp6type 3,128,129
+
+# -------------------------------------------------------------------- #
+#
+# NAT for the jails
+$cmd nat 1 config if $nat_if 
+$cmd add nat 1 all from $jail_lan to any
+$cmd add nat 1 all from any to $nat_ip
+
+# -------------------------------------------------------------------- #
+
+$cmd add allow tcp from any to me 22
+
+# Alles durchlassen
+$cmd add allow all from any to any

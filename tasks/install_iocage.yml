@@ -16,8 +16,8 @@
   lineinfile:
     path: /etc/rc.conf
     state: present
-    regexp: '^cloned_interfaces="lo1"'
-    line: 'cloned_interfaces="lo1"'
+    regexp: '^cloned_interfaces="lo1 bridge0"'
+    line: 'cloned_interfaces="lo1 bridge0"'
 
 - name: set ip of lo interface in rc.conf
   lineinfile:
@@ -31,10 +31,3 @@
     name: net.inet.ip.forwarding
     value: '1'
     state: present
-
-- name: enable gateway in rc.conf
-  lineinfile:
-    path: /etc/rc.conf
-    state: present
-    regexp: '^gateway_enable=”YES”'
-    line: 'gateway_enable=”YES”'
