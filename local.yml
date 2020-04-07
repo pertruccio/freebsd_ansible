@@ -25,3 +25,14 @@
   
   tasks:
     # - include: tasks/postfix.yml
+
+- hosts: ldap_servers
+  become: true
+  vars:
+    domain: muessig.family
+  
+  handlers:
+    - include: handlers/handler.yml
+  
+  tasks:
+    - include: tasks/install_snapd.yml

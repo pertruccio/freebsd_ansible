@@ -5,3 +5,5 @@ kamino.tech-ninja.de
 localhost
 [mail_servers]
 # kamino.tech-ninja.de
+[ldap_servers]
+kamino.tech-ninja.de
