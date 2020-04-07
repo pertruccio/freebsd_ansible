@@ -16,5 +16,25 @@
   lineinfile:
     path: /etc/rc.conf
     state: present
-    regexp: '^cloned_interfaces="lo1"\nipv4_addrs_lo1="172.16.1.1/24"'
-    line: 'cloned_interfaces="lo1"\nipv4_addrs_lo1="172.16.1.1/24"'
+    regexp: '^cloned_interfaces="lo1"'
+    line: 'cloned_interfaces="lo1"'
+
+- name: set ip of lo interface in rc.conf
+  lineinfile:
+    path: /etc/rc.conf
+    state: present
+    regexp: '^ipv4_addrs_lo1="172.16.1.1/24"'
+    line: 'ipv4_addrs_lo1="172.16.1.1/24"'
+
+- name: enable forwarding
+  sysctl:
+    name: net.inet.ip.forwarding
+    value: '1'
+    state: present
+
+- name: enable gateway in rc.conf
+  lineinfile:
+    path: /etc/rc.conf
+    state: present
+    regexp: '^gateway_enable=”YES”'
+    line: 'gateway_enable=”YES”'
