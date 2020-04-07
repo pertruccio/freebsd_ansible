@@ -3,3 +3,9 @@
   service:
     name: sshd
     state: restarted
+
+- name: restart ipfw
+  become: true
+  service:
+    name: ipfw
+    state: restarted
