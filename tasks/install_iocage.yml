@@ -12,7 +12,7 @@
 
 # manually execute iocage fetch on the shell! 
 
-- name: Create lo interface
+- name: Create lo interface in rc.conf
   lineinfile:
     path: /etc/rc.conf
     state: present
