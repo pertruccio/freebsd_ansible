@@ -2,3 +2,10 @@
   pkgng:
       name: 'py37-iocage'
       state: present # not required. choices: present;latest;absent. State of the package.,Note: "latest" added in 2.7
+
+- name: check /etc/fstab
+  lineinfile:
+      path: /etc/fstab # required. The file to modify.,Before 2.3 this option was only usable as I(dest), I(destfile) and I(name).
+      state: present # not required. choices: absent;present. Whether the line should be there or not.
+      regexp: '^fdescfs' # not required. The regular expression to look for in every line of the file. For C(state=present), the pattern to replace if found. Only the last line found will be replaced. For C(state=absent), the pattern of the line(s) to remove. Uses Python regular expressions. See U(http://docs.python.org/2/library/re.html).
+      line: 'fdescfs /dev/fd  fdescfs  rw  0  0' # not required. Required for C(state=present). The line to insert/replace into the file. If C(backrefs) is set, may contain backreferences that will get expanded with the C(regexp) capture groups if the regexp matches.
