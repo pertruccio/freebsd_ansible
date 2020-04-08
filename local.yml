@@ -15,7 +15,7 @@
     - include: tasks/ssh_config.yml
     - include: tasks/disable_login_banner.yml
     - include: tasks/install_iocage.yml
-    # - include: tasks/ipfw.yml
+    - include: tasks/firewall.yml
 
 - hosts: mail_servers
   become: true
