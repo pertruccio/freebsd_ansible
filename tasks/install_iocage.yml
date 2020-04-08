@@ -16,8 +16,8 @@
   lineinfile:
     path: /etc/rc.conf
     state: present
-    regexp: '^cloned_interfaces="lo1 bridge0"'
-    line: 'cloned_interfaces="lo1 bridge0"'
+    regexp: '^cloned_interfaces'
+    line: 'cloned_interfaces=lo1'
 
 - name: set ip of lo interface in rc.conf
   lineinfile:
