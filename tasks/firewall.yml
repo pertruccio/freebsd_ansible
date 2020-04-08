@@ -21,3 +21,17 @@
     path: /etc/rc.conf
     regex: '^pf_rules=/usr/local/etc/pf.conf'
     line: 'pf_rules=/usr/local/etc/pf.conf'
+
+- name: template clear overload tables script
+  template:
+    dest: /usr/local/bin/clear_overload.sh
+    src: templates/clear_overload.sh.j2
+    mode: 0755
+    owner: root
+    group: wheel
+
+- name: add cron for clear overload tables
+  cron:
+    name: clear overload tables
+    hour: '0'
+    job: '/usr/local/bin/clear_overload.sh'
