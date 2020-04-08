@@ -1,13 +1,13 @@
 - name: enable pf firewall in rc.conf
   lineinfile:
     path: /etc/rc.conf
-    regex: '^pf_enable=YES'
+    regex: '^pf_enable'
     line: 'pf_enable=YES'
 
 - name: enable pf log in rc.conf
   lineinfile:
     path: /etc/rc.conf
-    regex: '^pflog_enable=YES'
+    regex: '^pflog_enable'
     line: 'pflog_enable=YES'
 
 - name: templating pf rules

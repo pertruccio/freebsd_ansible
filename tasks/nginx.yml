@@ -1,0 +1,6 @@
+- name: enable nginx service
+  lineinfile:
+    path: /etc/rc.conf
+    regex: '^nginx_enable'
+    line: 'nginx_enable=YES'
+  
