@@ -2,6 +2,7 @@ pub_if = "em0"
 jail_if = "lo1"
 icmp_types = "{ echoreq, unreach, squench, timex, paramprob }"
 icmp6_types = "{ echoreq, unreach, toobig, timex, paramprob, redir, neighbradv, neighbrsol, routeradv, routersol }"
+allowed_tcp = "{ 22 80 443 }"
 table <bruteforce> persist
 table <rfc6890> { 0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 169.254.0.0/16          \
                   172.16.0.0/12 192.0.0.0/24 192.0.0.0/29 192.0.2.0/24 192.88.99.0/24    \
@@ -24,7 +25,7 @@ pass quick on $jail_if
 # allow all outgoing traffic on public
 pass out on $pub_if
 # allow ssh incoming
-pass in on $pub_if proto tcp to port { 22 } \
+pass in on $pub_if proto tcp to port $allowed_tcp \
     keep state (max-src-conn 15, max-src-conn-rate 3/1, \
     overload <bruteforce> flush global)
 # icmp
