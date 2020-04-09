@@ -1,0 +1,51 @@
+server {
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+
+	server_name kamino.tech-ninja.de;
+	root /var/www/kamino.tech-ninja.de/public;
+
+	# SSL
+	ssl_certificate /mnt/shares/certs/tech-ninja.cer;
+	ssl_certificate_key /mnt/shares/certs/tech-ninja.key;
+
+	# security
+	include conf.d/security.conf;
+
+	# logging
+	access_log /var/log/nginx/kamino.tech-ninja.de.access.log;
+	error_log /var/log/nginx/kamino.tech-ninja.de.error.log warn;
+
+	# reverse proxy
+	location /resilio/ {
+		proxy_pass http://172.16.1.2:8888;
+		include conf.d/proxy.conf;
+	}
+
+	# additional config
+	include conf.d/general.conf;
+}
+
+# subdomains redirect
+server {
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+
+	server_name *.kamino.tech-ninja.de;
+
+	# SSL
+	ssl_certificate /mnt/shares/certs/tech-ninja.cer;
+	ssl_certificate_key /mnt/shares/certs/tech-ninja.key;
+
+	return 301 https://kamino.tech-ninja.de$request_uri;
+}
+
+# HTTP redirect
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name .kamino.tech-ninja.de;
+
+	return 301 https://kamino.tech-ninja.de$request_uri;
+}

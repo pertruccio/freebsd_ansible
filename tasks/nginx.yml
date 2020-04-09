@@ -3,4 +3,56 @@
     path: /etc/rc.conf
     regex: '^nginx_enable'
     line: 'nginx_enable=YES'
-  
+
+- name: create conf.d
+  file:
+    path: /usr/local/etc/nginx/conf.d/
+    state: directory
+
+- name: create sites-available
+  file:
+    path: /usr/local/etc/nginx/sites-available/
+    state: directory
+
+- name: create sites-enabled
+  file:
+    path: /usr/local/etc/nginx/sites-enabled/
+    state: directory
+
+- name: template nginx.conf
+  template:
+    dest: /usr/local/etc/nginx/nginx.conf
+    src: templates/nginx.conf.j2
+    validate: 'nginx -t -c %s'
+
+- name: template general.conf
+  template:
+    dest: /usr/local/etc/nginx/conf.d/general.conf
+    src: templates/general.conf.j2
+    validate: 'nginx -t -c %s'
+
+- name: template proxy.conf
+  template:
+    dest: /usr/local/etc/nginx/conf.d/proxy.conf
+    src: templates/proxy.conf.j2
+    validate: 'nginx -t -c %s'
+
+- name: template security.conf
+  template:
+    dest: /usr/local/etc/nginx/conf.d/security.conf
+    src: templates/security.conf.j2
+    validate: 'nginx -t -c %s'
+
+- name: template website.conf
+  template:
+    dest: /usr/local/etc/nginx/sites-available/kamino.tech-ninja.de.conf
+    src: templates/kamino.tech-ninja.de.conf.j2
+    validate: 'nginx -t -c %s'
+
+- name: create symbolic link
+  file:
+    src: /usr/local/etc/nginx/sites-available/kamino.tech-ninja.de.conf
+    dest: /usr/local/etc/nginx/sites-enabled/kamino.tech-ninja.de.conf
+    owner: root
+    group: wheel
+    state: link
