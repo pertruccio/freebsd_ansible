@@ -24,14 +24,14 @@
     path: /etc/rc.conf
     state: present
     regexp: '^ifconfig_bridge0'
-    line: 'ifconfig_bridge0="addm em0"'
+    line: 'ifconfig_bridge0="addm em0 up"'
 
 - name: add interfaces to bridge1 in rc.conf
   lineinfile:
     path: /etc/rc.conf
     state: present
     regexp: '^ifconfig_bridge1'
-    line: 'ifconfig_bridge1="addm lo1"'
+    line: 'ifconfig_bridge1="addm lo1 up"'
 
 - name: enable forwarding
   sysctl:
