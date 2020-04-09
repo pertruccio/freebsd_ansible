@@ -23,31 +23,31 @@
   template:
     dest: /usr/local/etc/nginx/nginx.conf
     src: templates/nginx.conf.j2
-    validate: 'nginx -t -c %s'
+    # validate: 'nginx -t -c %s'
 
 - name: template general.conf
   template:
     dest: /usr/local/etc/nginx/conf.d/general.conf
     src: templates/general.conf.j2
-    validate: 'nginx -t -c %s'
+    # validate: 'nginx -t -c %s'
 
 - name: template proxy.conf
   template:
     dest: /usr/local/etc/nginx/conf.d/proxy.conf
     src: templates/proxy.conf.j2
-    validate: 'nginx -t -c %s'
+    # validate: 'nginx -t -c %s'
 
 - name: template security.conf
   template:
     dest: /usr/local/etc/nginx/conf.d/security.conf
     src: templates/security.conf.j2
-    validate: 'nginx -t -c %s'
+    # validate: 'nginx -t -c %s'
 
 - name: template website.conf
   template:
     dest: /usr/local/etc/nginx/sites-available/kamino.tech-ninja.de.conf
     src: templates/kamino.tech-ninja.de.conf.j2
-    validate: 'nginx -t -c %s'
+    # validate: 'nginx -t -c %s'
 
 - name: create symbolic link
   file:
