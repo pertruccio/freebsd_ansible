@@ -27,6 +27,7 @@ pass out on $pub_if
 pass in on $pub_if proto tcp from any to any port { 22 80 443 } \
     keep state (max-src-conn 15, max-src-conn-rate 3/1, \
     overload <bruteforce> flush global)
+pass in on $pub_if proto tcp from any to any port 64085 rdr-to 172.16.1.2
 # icmp
 pass in on $pub_if inet proto icmp all icmp-type $icmp_types
 pass in on $pub_if inet6 proto icmp6 all icmp6-type $icmp6_types allow-opts
