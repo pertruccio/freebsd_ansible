@@ -4,9 +4,9 @@
     regex: '^nginx_enable'
     line: 'nginx_enable=YES'
 
-- name: create conf.d
+- name: create templates
   file:
-    path: /usr/local/etc/nginx/conf.d/
+    path: /usr/local/etc/nginx/templates/
     state: directory
 
 - name: create sites-available
@@ -27,19 +27,19 @@
 
 - name: template general.conf
   template:
-    dest: /usr/local/etc/nginx/conf.d/general.conf
+    dest: /usr/local/etc/nginx/templates/general.conf
     src: templates/general.conf.j2
     # validate: 'nginx -t -c %s'
 
 - name: template proxy.conf
   template:
-    dest: /usr/local/etc/nginx/conf.d/proxy.conf
+    dest: /usr/local/etc/nginx/templates/proxy.conf
     src: templates/proxy.conf.j2
     # validate: 'nginx -t -c %s'
 
 - name: template security.conf
   template:
-    dest: /usr/local/etc/nginx/conf.d/security.conf
+    dest: /usr/local/etc/nginx/templates/security.conf
     src: templates/security.conf.j2
     # validate: 'nginx -t -c %s'
 
