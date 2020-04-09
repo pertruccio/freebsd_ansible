@@ -14,6 +14,7 @@ scrub in on $pub_if all fragment reassemble
 # outgoing nat for jails
 nat on $pub_if from 172.16.1.0/24 to any -> ($pub_if)
 rdr on $pub_if proto tcp from any to any port 64085 -> 172.16.1.2
+rdr on $pub_if proto udp from any to any port 64085 -> 172.16.1.2
 # block bogon, martians, etc
 block in quick on egress from <rfc6890>
 block return out quick on egress to <rfc6890>
