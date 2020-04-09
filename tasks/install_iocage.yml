@@ -12,19 +12,26 @@
 
 # manually execute iocage fetch on the shell! 
 
-- name: Create lo interface in rc.conf
+- name: Create cloned interfaces in rc.conf
   lineinfile:
     path: /etc/rc.conf
     state: present
     regexp: '^cloned_interfaces'
-    line: 'cloned_interfaces=lo1'
+    line: 'cloned_interfaces=lo1 bridge0 bridge1'
 
-- name: set ip of lo interface in rc.conf
+- name: add interfaces to bridge0 in rc.conf
   lineinfile:
     path: /etc/rc.conf
     state: present
-    regexp: '^ipv4_addrs_lo1="172.16.1.1/24"'
-    line: 'ipv4_addrs_lo1="172.16.1.1/24"'
+    regexp: '^ifconfig_bridge0'
+    line: 'ifconfig_bridge0="addm em0"'
+
+- name: add interfaces to bridge1 in rc.conf
+  lineinfile:
+    path: /etc/rc.conf
+    state: present
+    regexp: '^ifconfig_bridge1'
+    line: 'ifconfig_bridge1="addm lo1"'
 
 - name: enable forwarding
   sysctl:
