@@ -10,7 +10,7 @@ server {
 	ssl_certificate_key /mnt/shares/certs/tech-ninja.key;
 
 	# security
-	include conf.d/security.conf;
+	include security.conf;
 
 	# logging
 	access_log /var/log/nginx/kamino.tech-ninja.de.access.log;
@@ -19,11 +19,11 @@ server {
 	# reverse proxy
 	location /resilio/ {
 		proxy_pass http://172.16.1.2:8888;
-		include conf.d/proxy.conf;
+		include proxy.conf;
 	}
 
 	# additional config
-	include conf.d/general.conf;
+	include general.conf;
 }
 
 # subdomains redirect
