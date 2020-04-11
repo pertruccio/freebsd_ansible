@@ -7,11 +7,12 @@ table <rfc6890> { 0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 169.254.0.0/16 
                   172.16.0.0/12 192.0.0.0/24 192.0.0.0/29 192.0.2.0/24 192.88.99.0/24    \
                   192.168.0.0/16 198.18.0.0/15 198.51.100.0/24 203.0.113.0/24            \
                   240.0.0.0/4 255.255.255.255/32 }
-table <fail2ban> persist
 #-----------------------------
 set skip on lo0
 # sanitizie packets
 scrub in on $pub_if all fragment reassemble
+# fail2ban anchor
+anchor "f2b/*"
 # outgoing nat for jails
 nat on $pub_if from 172.16.1.0/24 to any -> ($pub_if)
 rdr on $pub_if proto tcp from any to any port 64085 -> 172.16.1.2
@@ -19,8 +20,6 @@ rdr on $pub_if proto udp from any to any port 64085 -> 172.16.1.2
 # block bogon, martians, etc
 block in quick on egress from <rfc6890>
 block return out quick on egress to <rfc6890>
-# block fail2ban ips 
-block in quick from <fail2ban>
 # default block all
 block all
 antispoof quick for $pub_if
