@@ -17,6 +17,7 @@
     - include: tasks/disable_login_banner.yml
     - include: tasks/install_iocage.yml
     - include: tasks/firewall.yml
+    - include: tasks/fail2ban.yml
     - include: tasks/nginx.yml
 
 - hosts: mail_servers

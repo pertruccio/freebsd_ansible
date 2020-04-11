@@ -4,8 +4,8 @@
     name: sshd
     state: restarted
 
-- name: restart ipfw
+- name: restart fail2ban
   become: true
   service:
-    name: ipfw
+    name: fail2ban
     state: restarted
