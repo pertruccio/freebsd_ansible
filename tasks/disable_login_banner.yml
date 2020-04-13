@@ -1,5 +1,6 @@
 - name: disable login banner
   copy:
     content: ""
-    dest: "~/.hushlogin"
+    dest: "{{ root_home_dir if item == 'root' else home_dir ~ item }}/.hushlogin"
     force: no
+  with_items: "{{ users }}"

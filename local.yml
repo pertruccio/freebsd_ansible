@@ -4,8 +4,8 @@
     oh_my_zsh_repo: https://github.com/robbyrussell/oh-my-zsh
     #ansible_python_interpreter: /usr/bin/python3
     ohmyzsh_install_dir: '/usr/local/share/ohmyzsh'
-    ohmyzsh_root_dir: '/root'
-    ohmyzsh_home_dir: '/home/'
+    root_home_dir: '/root'
+    home_dir: '/home/'
     users:
       - admin
       - ansible
