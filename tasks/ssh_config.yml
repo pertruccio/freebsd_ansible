@@ -10,3 +10,4 @@
     path: /etc/ssh/sshd_config
     regex: "^PermitRootLogin"
     line: "PermitRootLogin no"
+  notify: restart ssh
