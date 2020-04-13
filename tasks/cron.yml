@@ -1,0 +1,5 @@
+- name: add ansible pull cronjob
+  cron:
+    name: ansible pull cronjob
+    minute: '*/15'
+    job: "/usr/local/bin/ansible-pull -U https://github.com/pertruccio/freebsd_ansible -i inventory --vault-password-file=/root/.vault_file"

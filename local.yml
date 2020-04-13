@@ -21,6 +21,7 @@
     - include: tasks/ohmyzsh.yml
     - include: tasks/ssh_config.yml
     - include: tasks/disable_login_banner.yml
+    - include: tasks/cron.yml
     - include: tasks/install_iocage.yml
     - include: tasks/firewall.yml
     - include: tasks/fail2ban.yml
