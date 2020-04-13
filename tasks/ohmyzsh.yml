@@ -16,19 +16,19 @@
 - name: theme install
   git:
     repo: "https://github.com/romkatv/powerlevel10k.git"
-    dest: "~/.oh-my-zsh/custom/themes/powerlevel10k"
+    dest: "{{ ohmyzsh_install_dir }}/custom/themes/powerlevel10k"
     depth: 1
 
 # plugins
 - name: zsh-syntax-highlighting
   git:
     repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    dest: "{{ ohmyzsh_install_dir }}/custom/plugins/zsh-syntax-highlighting"
 
 - name: zsh-autosuggestions
   git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions"
-    dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "{{ ohmyzsh_install_dir }}/custom/plugins/zsh-autosuggestions"
 
 # on freebsd you need to install lsd via rust and cargo
 # see https://github.com/Peltoche/lsd
