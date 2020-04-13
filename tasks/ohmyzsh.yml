@@ -36,17 +36,19 @@
 
 - name: templating ~/.zshrc
   template:
-    src: "/usr/local/src/git/.dotfiles/.zshrc_bsd"
-    dest: "~/.zshrc"
+    src: "/usr/local/src/git/.dotfiles/.zshrc_bsd.j2"
+    dest: "{{ ohmyzsh_root_dir if item == 'root' else ohmyzsh_home_dir ~ item }}/.zshrc"
     backup: yes 
+  with_items: "{{ users }}"
 
 - name: templating ~/.theme.zsh
   template:
     src: "/usr/local/src/git/.dotfiles/.theme.zsh"
-    dest: "~/.theme.zsh"
+    dest: "{{ ohmyzsh_root_dir if item == 'root' else ohmyzsh_home_dir ~ item }}/.theme.zsh"
     backup: yes
+  with_items: "{{ users }}"
 
-- name: set zsh as default shell
+- name: set zsh as root default shell
   user: 
     name: root
     shell: /usr/local/bin/zsh
