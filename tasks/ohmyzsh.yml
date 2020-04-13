@@ -14,6 +14,9 @@
 #     dest: "~/.oh-my-zsh/custom/themes/"
 
 - name: theme install
+  become: yes
+  become_user: '{{ users }}'
+  with_items: '{{ users }}'
   git:
     repo: "https://github.com/romkatv/powerlevel10k.git"
     dest: "~/.oh-my-zsh/custom/themes/powerlevel10k"
