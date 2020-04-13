@@ -13,7 +13,7 @@
     - include: tasks/system_settings.yml
     - include: tasks/ntp.yml
     - include: tasks/packages.yml
-    - include: task/users.yml
+    - include: tasks/users.yml
     - include: tasks/dotfiles.yml
     - include: tasks/ohmyzsh.yml
     - include: tasks/ssh_config.yml
