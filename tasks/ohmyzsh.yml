@@ -36,13 +36,13 @@
 
 - name: templating ~/.zshrc
   template:
-    src: "~/.dotfiles/.zshrc_bsd"
+    src: "/usr/local/src/git/.dotfiles/.zshrc_bsd"
     dest: "~/.zshrc"
     backup: yes 
 
 - name: templating ~/.theme.zsh
   template:
-    src: "~/.dotfiles/.theme.zsh"
+    src: "/usr/local/src/git/.dotfiles/.theme.zsh"
     dest: "~/.theme.zsh"
     backup: yes
 
