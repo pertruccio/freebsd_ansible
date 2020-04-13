@@ -1,7 +1,7 @@
 - name: deploy oh-my-zsh
   git: 
     repo: "{{ oh_my_zsh_repo }}"
-    dest: "~/.oh-my-zsh"
+    dest: "{{ ohmyzsh_install_dir }}"
 
 # - name: get k plugin
 #   git:
