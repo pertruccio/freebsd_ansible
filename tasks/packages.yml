@@ -1,4 +1,4 @@
 - name: Install packages
   pkgng:
-      name: ['nano','tmux','zsh','neofetch','coreutils','sudo','rust','zsh-syntax-highlighting','htop','bat','pftop','nginx','ntp','py37-fail2ban']
+      name: ['nano','tmux','zsh','neofetch','coreutils','sudo','rust','zsh-syntax-highlighting','htop','bat','pftop','nginx','ntp','py37-fail2ban','python3','py37-pip']
       state: present # not required. choices: present;latest;absent. State of the package.,Note: "latest" added in 2.7
