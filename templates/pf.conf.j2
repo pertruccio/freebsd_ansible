@@ -33,7 +33,7 @@ pass quick on $jail_if
 # allow all outgoing traffic on public
 pass out on $pub_if
 # allow ssh incoming
-pass in on $pub_if proto tcp from any to any port { 22 80 443 } keep state 
+pass in on $pub_if proto tcp from any to any port { 22 25 80 443 587 993 } keep state 
 # icmp
 pass in on $pub_if inet proto icmp all icmp-type $icmp_types
 pass in on $pub_if inet6 proto icmp6 all icmp6-type $icmp6_types allow-opts
