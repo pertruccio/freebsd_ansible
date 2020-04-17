@@ -25,15 +25,11 @@ server {
 	error_log /var/log/nginx/kamino.tech-ninja.de.error.log warn;
 
 	# reverse proxy section
-	location /resilio/ {
-		proxy_pass http://172.16.1.2:8888/gui/;
-		include templates/proxy.conf;
-	}
 	location = /netdata {
         return 301 /netdata/;
-   }
+	}
 
-   location ~ /netdata/(?<ndpath>.*) {
+	location ~ /netdata/(?<ndpath>.*) {
 		auth_basic "Protected";
     	auth_basic_user_file passwords;
 		# include templates/proxy.conf;
@@ -53,6 +49,11 @@ server {
         gzip_proxied any;
         gzip_types *;
     }
+	
+	location /resilio/ {
+		proxy_pass http://172.16.1.2:8888/gui/;
+		include templates/proxy.conf;
+	}
 
 	# additional config
 	include templates/general.conf;
