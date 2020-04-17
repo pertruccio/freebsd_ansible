@@ -4,3 +4,8 @@
     regex: '^netdata_enable'
     line: 'netdata_enable="YES"'
 
+- name: run on socket
+  lineinfile:
+    path: /usr/local/etc/netdata/netdata.conf
+    regex: '^\tbind to'
+    line: ' bind to = unix:/var/run/netdata/netdata.sock'
