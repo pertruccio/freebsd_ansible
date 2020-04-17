@@ -8,4 +8,4 @@
   lineinfile:
     path: /usr/local/etc/netdata/netdata.conf
     regex: '^\tbind to'
-    line: ' bind to = unix:/var/run/netdata/netdata.sock'
+    line: '     bind to = unix:/var/run/netdata/netdata.sock'
