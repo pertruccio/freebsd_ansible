@@ -1,3 +1,8 @@
+upstream netdata {
+    server 127.0.0.1:19999;
+    keepalive 64;
+}
+
 server {
 	listen 443 ssl http2;
 	listen [::]:443 ssl http2;
@@ -19,11 +24,28 @@ server {
 	access_log /var/log/nginx/kamino.tech-ninja.de.access.log;
 	error_log /var/log/nginx/kamino.tech-ninja.de.error.log warn;
 
-	# reverse proxy
+	# reverse proxy section
 	location /resilio/ {
 		proxy_pass http://172.16.1.2:8888/gui/;
 		include templates/proxy.conf;
 	}
+	location = /netdata {
+        return 301 /netdata/;
+   }
+
+   location ~ /netdata/(?<ndpath>.*) {
+		include templates/proxy.conf;
+        proxy_redirect off;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_pass_request_headers on;
+        proxy_set_header Connection "keep-alive";
+        proxy_store off;
+        proxy_pass http://netdata/$ndpath$is_args$args;
+
+        gzip on;
+        gzip_proxied any;
+        gzip_types *;
+    }
 
 	# additional config
 	include templates/general.conf;
