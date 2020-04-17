@@ -26,6 +26,7 @@
     - include: tasks/firewall.yml
     - include: tasks/fail2ban.yml
     - include: tasks/nginx.yml
+    - include: tasks/netdata.yml
 
 - hosts: mail_servers
   become: true

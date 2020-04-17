@@ -1,0 +1,6 @@
+- name: enabling netdata
+  lineinfile:
+    path: /etc/rc.conf
+    regex: '^netdata_enable'
+    line: 'netdata_enable="YES"'
+
