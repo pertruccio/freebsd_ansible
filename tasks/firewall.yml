@@ -34,4 +34,4 @@
   cron:
     name: clear overload tables
     hour: '0'
-    job: '/usr/local/bin/clear_overload.sh'
+    job: '/usr/local/bin/clear_overload.sh > /dev/null'
