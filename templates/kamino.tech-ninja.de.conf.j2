@@ -34,6 +34,8 @@ server {
    }
 
    location ~ /netdata/(?<ndpath>.*) {
+		auth_basic "Protected";
+    	auth_basic_user_file passwords;
 		# include templates/proxy.conf;
         proxy_redirect off;
         proxy_set_header Host $host;
