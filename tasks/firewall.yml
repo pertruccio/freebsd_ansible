@@ -30,8 +30,8 @@
     owner: root
     group: wheel
 
-- name: add cron for clear overload tables
+- name: add cron for clear overload tables [disabled]
   cron:
     name: clear overload tables
     hour: '0'
-    job: '/usr/local/bin/clear_overload.sh > /dev/null'
+    job: '# /usr/local/bin/clear_overload.sh > /dev/null'
