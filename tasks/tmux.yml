@@ -1,0 +1,9 @@
+- name: templating tmux base configuration
+  template:
+    src: "/usr/local/src/git/.dotfiles/.tmux.conf.j2"
+    dst: "{{ root_home_dir if item == 'root' else home_dir ~ item }}/.tmux.conf"
+
+- name: templating tmux local configuration
+  template:
+    src: "/usr/local/src/git/.dotfiles/.tmux.conf.local.j2"
+    dst: "{{ root_home_dir if item == 'root' else home_dir ~ item }}/.tmux.conf.local"
