@@ -1,3 +1,9 @@
+- name: Install tmux plugin manager
+  git:
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: "{{ root_home_dir if item == 'root' else home_dir ~ item }}/.tmux/plugins/tpm"
+  with_items: "{{ users }}"
+
 - name: templating tmux base configuration
   template:
     src: "/usr/local/src/git/.dotfiles/.tmux.conf.j2"
