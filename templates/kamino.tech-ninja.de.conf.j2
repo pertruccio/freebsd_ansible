@@ -55,6 +55,13 @@ server {
 		include templates/proxy.conf;
 	}
 
+	location ~/paperless(.*)$ {
+		proxy_set_header X-Real-IP  $remote_addr;
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_set_header Host $host;
+		proxy_pass http://172.16.1.4$1;
+	}
+
 	# additional config
 	include templates/general.conf;
 }
