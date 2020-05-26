@@ -9,6 +9,6 @@ add_header Content-Security-Policy "default-src 'self' data: https: *.tech-ninja
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
 # . files
-location ~ /\.(?!well-known) {
-	deny all;
-}
+#location ~ /\.(?!well-known) {
+#	deny all;
+#}
