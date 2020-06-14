@@ -28,6 +28,7 @@
     - include: tasks/nginx.yml
     - include: tasks/netdata.yml
     - include: tasks/tmux.yml
+    - include: tasks/vm-bhyve.yml
 
 - hosts: mail_servers
   become: true
