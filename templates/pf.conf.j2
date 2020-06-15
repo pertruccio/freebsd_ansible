@@ -1,6 +1,7 @@
 # options
 pub_if = "em0"
 jail_if = "lo1"
+$bhyve-if = "vm-public"
 icmp_types = "{ echoreq, unreach, squench, timex, paramprob }"
 icmp6_types = "{ echoreq, unreach, toobig, timex, paramprob, redir, neighbradv, neighbrsol, routeradv, routersol }"
 table <bruteforce> persist
@@ -15,7 +16,7 @@ set skip on lo0
 scrub in on $pub_if all fragment reassemble
 # queueing
 # translation
-# outgoing nat for jails
+# outgoing nat for jails and vm
 nat on $pub_if from 172.16.1.0/24 to any -> ($pub_if)
 nat on $pub_if from {192.168.8.0/24} to any -> ($pub_if)
 rdr on $pub_if proto tcp from any to any port 64085 -> 172.16.1.2
@@ -31,6 +32,8 @@ block all
 antispoof quick for $pub_if
 # allow all on jail interface
 pass quick on $jail_if
+# allow all on bhyve interface
+pass quick on $bhyve-if
 # allow all outgoing traffic on public
 pass out on $pub_if
 # allow ssh incoming
