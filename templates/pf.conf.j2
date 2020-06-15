@@ -1,7 +1,7 @@
 # options
 pub_if = "em0"
 jail_if = "lo1"
-$bhyve-if = "vm-public"
+bhyve_if = "vm-public"
 icmp_types = "{ echoreq, unreach, squench, timex, paramprob }"
 icmp6_types = "{ echoreq, unreach, toobig, timex, paramprob, redir, neighbradv, neighbrsol, routeradv, routersol }"
 table <bruteforce> persist
@@ -33,7 +33,7 @@ antispoof quick for $pub_if
 # allow all on jail interface
 pass quick on $jail_if
 # allow all on bhyve interface
-pass quick on $bhyve-if
+pass quick on $bhyve_if
 # allow all outgoing traffic on public
 pass out on $pub_if
 # allow ssh incoming
